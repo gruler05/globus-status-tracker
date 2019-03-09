@@ -1,11 +1,22 @@
 import React from 'react';
 import moment from 'moment';
+
 export default class Table extends React.Component {
   convertSec = time => {
     const date = new Date(time * 1000).toISOString().substring(11, 19);
     return date;
   };
-
+  highlightStatus = text => {
+    const valuesToHighlight = ['success', 'error', 'fail'];
+    let value = '';
+    valuesToHighlight.forEach(elem =>
+      text.includes(elem) ? (value = elem) : ''
+    );
+    if (value) {
+      const subString = text.substr(text.indexOf(value), value.length);
+      return { __html: text.replace(subString, subString.bold()) };
+    }
+  };
   getStatus = (startDate = '', endDate = '', total, processed, remaining) => {
     if (!startDate) {
       // if status is INACTIVE
@@ -40,9 +51,8 @@ export default class Table extends React.Component {
       }
     }
   };
+
   render() {
-    const { data } = this.props;
-    console.log(data);
     return (
       <div>
         <table>
@@ -55,7 +65,7 @@ export default class Table extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {data.map(elem => {
+            {this.props.tableData.map(elem => {
               return (
                 <tr key={elem.id}>
                   <td>
@@ -68,7 +78,11 @@ export default class Table extends React.Component {
                         elem.remaining
                       )}
                     </div>
-                    <div>{elem.status}</div>
+                    <div
+                      dangerouslySetInnerHTML={this.highlightStatus(
+                        elem.status
+                      )}
+                    />
                   </td>
                   <td>{`${this.bytesToSize(
                     elem.processed || 0
