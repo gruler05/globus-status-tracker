@@ -24,7 +24,7 @@ then `npm run start`
 
 Run production build if you want to `npm run build`
 
-##Project Structure
+## Project Structure
 
 The project have two folder `./public` and `./src`
 
