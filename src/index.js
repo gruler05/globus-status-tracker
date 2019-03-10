@@ -53,17 +53,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <LoadData getData={this.getAndModifyData} />
-        {this.state.hasError && (
+        {this.state.hasError ? (
           <h2 className="error">
             It looks like something might be wrong with the data. Please check
             your browser console for more details or change the dataset.
           </h2>
-        )}
-        {this.state.data.length !== 0 ? (
+        ) : this.state.data.length !== 0 ? (
           <DataTable tableData={this.state.data} />
         ) : (
           <div className="lds-dual-ring" />
         )}
+        {}
       </div>
     );
   }
