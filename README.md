@@ -9,12 +9,9 @@ You don't need to build the project, you can test it and check the code in codes
 
 You don't need to pull in and build the project. You can visit the codesandbox version of the project
 
-### Check out the code here: https://codesandbox.io/s/z3zx53v04m
+### Check out the code here: https://codesandbox.io/s/github/gruler05/globus-status-tracker
 
-### Check out the demo here: https://z3zx53v04m.codesandbox.io/
-
-if the above demo doesn't work for some reason. I have deployed the project on netlify as well.
-https://globusdatatracker.netlify.com/
+### Check out the demo here: https://globusdatatracker.netlify.com/
 
 ### Building and Running Project Locally
 
