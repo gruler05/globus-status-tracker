@@ -2,6 +2,12 @@
 
 The entire project is made in codesandbox so there would be no need of building the project so it will also eliminate all the weird Node version dependency issues. If you have any other questions you can email me at bansodegaurav@gmail.com
 
+You don't need to build the project, you can test it and check the code in codesandbox directly.
+
+## Check out the demo here: https://z3zx53v04m.codesandbox.io/
+
+## Check out the code here: https://codesandbox.io/s/z3zx53v04m
+
 Project Structure:
 
 The project have two folder `./public` and `./src`
