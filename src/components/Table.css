@@ -1,0 +1,16 @@
+.table-container {
+  width: 100%;
+  display: block;
+}
+.table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table-container table th,
+.table-container table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.table-container table th {
+  color: gray;
+}

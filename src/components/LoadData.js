@@ -1,7 +1,7 @@
 import React from 'react';
-
+import './LoadData.css';
 export default class Table extends React.Component {
-  doSomething = event => {
+  onDropdownChange = event => {
     this.props.getData(event.target.value);
   };
   componentDidMount() {
@@ -9,8 +9,9 @@ export default class Table extends React.Component {
   }
   render() {
     return (
-      <div>
-        <select name="cars" onChange={this.doSomething}>
+      <div className="dataset-container">
+        <label htmlFor="dataset">Choose your data set</label>
+        <select name="dataset" onChange={this.onDropdownChange}>
           <option
             defaultValue
             value="https://z3zx53v04m.codesandbox.io/test.json"

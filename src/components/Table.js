@@ -1,60 +1,15 @@
 import React from 'react';
 import moment from 'moment';
-
+import {
+  highlightStatus,
+  getStatus,
+  bytesToSize
+} from '../services/helperFunctions';
+import './Table.css';
 export default class Table extends React.Component {
-  convertSec = time => {
-    const date = new Date(time * 1000).toISOString().substring(11, 19);
-    return date;
-  };
-  highlightStatus = text => {
-    const valuesToHighlight = ['success', 'error', 'fail'];
-    let value = '';
-    valuesToHighlight.forEach(elem =>
-      text.includes(elem) ? (value = elem) : ''
-    );
-    if (value) {
-      const subString = text.substr(text.indexOf(value), value.length);
-      return { __html: text.replace(subString, subString.bold()) };
-    }
-  };
-  getStatus = (startDate = '', endDate = '', total, processed, remaining) => {
-    if (!startDate) {
-      // if status is INACTIVE
-      return 'Not started';
-    } else {
-      if (!endDate) {
-        // if status is in progress
-        return `Time Remaining: ${this.convertSec(remaining)}`;
-      }
-    }
-    if (startDate && endDate) {
-      // status success or error
-      return total !== processed
-        ? `Halted ${moment(endDate, 'YYYY-MM-DDTHH:mm:ss.SSS+-HH:mm').format(
-            'MM/DD/YYYY hh:mm A'
-          )}`
-        : `Completed: ${moment(
-            endDate,
-            'YYYY-MM-DDTHH:mm:ss.SSS+-HH:mm'
-          ).format('MM/DD/YYYY hh:mm A')}`;
-    }
-  };
-
-  bytesToSize = bytes => {
-    const SIZES = ['b', 'kB', 'MB', 'GB', 'TB'];
-    let bytesToConvert = bytes;
-    for (let i = 0; i < SIZES.length; i++) {
-      if (bytesToConvert <= 1024) {
-        return `${bytesToConvert}${SIZES[i]}`;
-      } else {
-        bytesToConvert = parseFloat(bytesToConvert / 1024).toFixed(2);
-      }
-    }
-  };
-
   render() {
     return (
-      <div>
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -70,23 +25,23 @@ export default class Table extends React.Component {
                 <tr key={elem.id}>
                   <td>
                     <div>
-                      {this.getStatus(
-                        elem.start_date,
-                        elem.end_date,
-                        elem.total,
-                        elem.processed,
-                        elem.remaining
-                      )}
+                      {
+                        getStatus(
+                          elem.start_date,
+                          elem.end_date,
+                          elem.total,
+                          elem.processed,
+                          elem.remaining
+                        ).status
+                      }
                     </div>
                     <div
-                      dangerouslySetInnerHTML={this.highlightStatus(
-                        elem.status
-                      )}
+                      dangerouslySetInnerHTML={highlightStatus(elem.status)}
                     />
                   </td>
-                  <td>{`${this.bytesToSize(
-                    elem.processed || 0
-                  )} / ${this.bytesToSize(elem.total)}`}</td>
+                  <td>{`${bytesToSize(elem.processed || 0)} / ${bytesToSize(
+                    elem.total
+                  )}`}</td>
                   <td>
                     <a href={`mailto:${elem.email}`}>{elem.fullname}</a>
                   </td>
