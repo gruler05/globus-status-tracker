@@ -22,39 +22,48 @@ class App extends React.Component {
     });
   };
   getAndModifyData = async url => {
-    const { DATA: data } = await getJsonData(url);
-    if (Array.isArray(data)) {
-      const changedData = [...data];
-      data.forEach((elem, i) => {
-        const { type, status, order } = getStatus(
-          elem.start_date,
-          elem.end_date,
-          elem.total,
-          elem.processed,
-          elem.remaining
-        );
-        changedData[i]['type'] = type;
-        changedData[i]['new_status'] = status;
-        changedData[i]['order'] = order;
-      });
-      const sortedData = this.sortData(changedData);
-      this.setState({ data: sortedData, hasError: false });
-    } else {
+    try {
+      const { DATA: data } = await getJsonData(url);
+      if (Array.isArray(data)) {
+        const changedData = [...data];
+        data.forEach((elem, i) => {
+          const { type, status, order } = getStatus(
+            elem.start_date,
+            elem.end_date,
+            elem.total,
+            elem.processed,
+            elem.remaining
+          );
+          changedData[i]['type'] = type;
+          changedData[i]['new_status'] = status;
+          changedData[i]['order'] = order;
+        });
+        const sortedData = this.sortData(changedData);
+        this.setState({ data: sortedData, hasError: false });
+      } else {
+        this.setState({ hasError: true });
+      }
+    } catch (e) {
       this.setState({ hasError: true });
     }
   };
+
   // Todo: Mostly Create ErrorHandler component, use componentDidCatch
   render() {
     return (
       <div className="App">
         <LoadData getData={this.getAndModifyData} />
         {this.state.hasError && (
-          <h2>
+          <h2 className="error">
             It looks like something might be wrong with the data. Please check
             your browser console for more details or change the dataset.
           </h2>
         )}
-        <DataTable tableData={this.state.data} />
+        {this.state.data.length !== 0 ? (
+          <DataTable tableData={this.state.data} />
+        ) : (
+          <div className="lds-dual-ring" />
+        )}
       </div>
     );
   }
