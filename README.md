@@ -3,6 +3,7 @@
 The entire project is made in codesandbox so there would be no need of building the project so it will also eliminate all the weird Node version dependency issues. If you have any other questions you can email me at bansodegaurav@gmail.com
 
 You don't need to build the project, you can test it and check the code in codesandbox directly.
+[Click here](#building-and-running-project-locally) just in case you want it locally
 
 ## How to build/run the Project
 
@@ -15,7 +16,7 @@ You don't need to pull in and build the project. You can visit the codesandbox v
 if the above demo doesn't work for some reason. I have deployed the project on netlify as well.
 https://distracted-wing-1f7335.netlify.com/
 
-**If you want to run the project locally**
+### Building and Running Project Locally
 
 Install all dependencies `npm i`
 
@@ -45,7 +46,7 @@ For date conversion I am using [`moment.js`](https://momentjs.com/) and [`moment
 
 `./services` folder consist of two files. First is `getJsonData.js` which basically is to pull in the data using url provided to the function. The other file has all the helper functions which are being used in the project as per the different requirements.
 
-##Requirements
+## Requirements
 
 A: All the requirements have been completed if there is anything missing let me know I can add the missing features.
 
