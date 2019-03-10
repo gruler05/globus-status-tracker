@@ -14,7 +14,7 @@ You don't need to pull in and build the project. You can visit the codesandbox v
 ### Check out the demo here: https://z3zx53v04m.codesandbox.io/
 
 if the above demo doesn't work for some reason. I have deployed the project on netlify as well.
-https://globusdatatracket.netlify.com/
+https://globusdatatracker.netlify.com/
 
 ### Building and Running Project Locally
 
