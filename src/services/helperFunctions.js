@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment-timezone';
 
-const convertSec = time => {
+const convertSeconds = time => {
   const date = moment.unix(time).format('hh:mm:ss');
   const seconds = moment.duration(date, 'hh:mm:ss').asSeconds();
   const day = Math.floor(seconds / (3600 * 24));
@@ -28,6 +28,8 @@ const highlightStatus = text => {
     return { __html: text.replace(subString, subString.bold()) };
   }
 };
+
+// Todo: Refactor this code for reusing with different component in future
 const getStatus = (
   startDate = '',
   endDate = '',
@@ -43,7 +45,7 @@ const getStatus = (
       // if status is in progress
       return {
         type: 'IN_PROGRESS',
-        status: `Time Remaining: ${convertSec(remaining)}`,
+        status: `Time Remaining: ${convertSeconds(remaining)}`,
         order: 2
       };
     }
@@ -80,4 +82,4 @@ const bytesToSize = bytes => {
   }
 };
 
-export { convertSec, highlightStatus, getStatus, bytesToSize };
+export { highlightStatus, getStatus, bytesToSize };

@@ -7,6 +7,7 @@ export default class Table extends React.Component {
   componentDidMount() {
     this.props.getData('./test.json');
   }
+  // Todo: add text box if time permits to import data from different urls
   render() {
     return (
       <div className="dataset-container">

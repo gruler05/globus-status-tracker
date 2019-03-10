@@ -4,9 +4,15 @@ import {
   highlightStatus,
   getStatus,
   bytesToSize
-} from '../services/helperFunctions';
-import './Table.css';
-export default class Table extends React.Component {
+} from '../../services/helperFunctions';
+import './DataTable.css';
+
+export default class DataTable extends React.Component {
+  getProgress = ({ processed, total }) => {
+    const processedValue = bytesToSize(processed || 0);
+    const totalValue = bytesToSize(total);
+    return `${processedValue}/${totalValue}`;
+  };
   render() {
     return (
       <div className="table-container">
@@ -39,9 +45,7 @@ export default class Table extends React.Component {
                       dangerouslySetInnerHTML={highlightStatus(elem.status)}
                     />
                   </td>
-                  <td>{`${bytesToSize(elem.processed || 0)} / ${bytesToSize(
-                    elem.total
-                  )}`}</td>
+                  <td>{this.getProgress(elem)}</td>
                   <td>
                     <a href={`mailto:${elem.email}`}>{elem.fullname}</a>
                   </td>
